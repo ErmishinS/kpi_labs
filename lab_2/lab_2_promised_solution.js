@@ -14,7 +14,7 @@ const asyncMap = (array, asyncCallback) => {
                     }
                 })
                 .catch(err => {
-                    console.error(err);
+                    console.error(err.message);
                     mappedArray[i] = undefined;
                     completed++;
                     if (completed === arrayLength) {
@@ -32,7 +32,7 @@ const asyncDouble = (value) => {
 
         setTimeout(() => {
             if (typeof value !== 'number') {
-                reject(new Error('Input must be a number'));
+                reject(new Error(`${value} is not a number!`));
             } else {
                 resolve(value * 2);
             }
@@ -42,7 +42,7 @@ const asyncDouble = (value) => {
 
 
 
-const numbers = [1, 2, 5, 26, 3, 9, 0];
+const numbers = [1, 2, 5, 'ogogog', 3, 9, 0];
 console.log("Original array: ", numbers);
 
 asyncMap(numbers, asyncDouble)
@@ -50,5 +50,5 @@ asyncMap(numbers, asyncDouble)
         console.log("Promise-based results:", results);
     })
     .catch(err => {
-        console.error("Error in Promise-based map:", err);
+        console.error(err.message);
     });

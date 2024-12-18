@@ -8,7 +8,7 @@ const asyncMap = async (array, asyncCallback, signal) => {
             if (err.name === 'AbortError') {
                 console.error(`Operation aborted for item ${item}`);
             } else {
-                console.error(err);
+                console.error(err.message);
             }
             mappedArray[index] = undefined;
         }
@@ -24,7 +24,7 @@ const asyncDouble = async (value, signal) => {
     return new Promise((resolve, reject) => {
         const timeout = setTimeout(() => {
             if (typeof value !== 'number') {
-                reject(new Error('Input must be a number'));
+                reject(new Error(`${value} is not a number!`));
             } else {
                 resolve(value * 2);
             }
@@ -32,7 +32,9 @@ const asyncDouble = async (value, signal) => {
 
         signal.addEventListener('abort', () => {
             clearTimeout(timeout);
-            reject(new DOMException('Operation aborted', 'AbortError'));
+            const abortError = new Error('AbortError')
+            abortError.name = 'AbortError'
+            reject(abortError);
         });
     });
 };
@@ -54,7 +56,7 @@ async function processWithAbortController() {
         const results = await asyncMap(numbers, asyncDouble, signal);
         console.log("Results with AbortController:", results);
     } catch (err) {
-        console.error(err);
+        console.error(err.message);
     }
 }
 

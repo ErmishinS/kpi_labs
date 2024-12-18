@@ -6,7 +6,7 @@ const asyncMap = (array, asyncCallback) => {
     for (let i = 0; i < arrayLength; i++) {
         asyncCallback(array[i], (err, result) => {
             if (err) {
-                console.error("Error: ", err);
+                console.error(err.message);
                 return;
             }
 
