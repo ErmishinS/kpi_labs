@@ -1,3 +1,10 @@
+# Task 1
+  * Choose array fn (map/filter/filterMap/some/find/findIndex)
+  * Prepare its callback based async counterpart
+  * Prepare demo cases for the usage
+
+# JS code
+```js
 const asyncMap = (array, asyncCallback) => {
     const arrayLength = array.length
     const mappedArray = [];
@@ -30,7 +37,20 @@ const asyncDouble = (value, cb) => {
     }, delay);
 }
 
-const numbers = [5, 4, 3, 26];
+const numbers = [1, 2, 3];
 console.log("Original array: ", numbers)
 
 asyncMap(numbers, asyncDouble);
+
+```
+
+# Testing program
+
+### Test 1
+<img src="./media/lab_1_test_1.png">
+
+### Test 2
+<img src="./media/lab_1_test_2.png">
+
+### Test 3
+<img src="./media/lab_1_test_3.png">
