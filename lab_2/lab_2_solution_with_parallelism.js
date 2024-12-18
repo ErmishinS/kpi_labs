@@ -28,7 +28,7 @@ const asyncDouble = async (value) => {
     });
 };
 
-const numbers = ['string', 'str', 12345];
+const numbers = [52, 2626, 1, 0, 5];
 console.log("Original array: ", numbers);
 
 async function processWithAsyncAwait() {

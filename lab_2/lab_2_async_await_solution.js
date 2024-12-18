@@ -28,7 +28,7 @@ const asyncDouble = async (value) => {
 };
 
 
-const numbers = [1.1, 'qwerty', 26];
+const numbers = [1.1, 5.5, 26];
 console.log("Original array: ", numbers);
 
 async function processWithAsyncAwait() {

@@ -42,7 +42,7 @@ const asyncDouble = (value) => {
 
 
 
-const numbers = [1, 2, 5, 'asdklfjh', 3, 9, 0];
+const numbers = [1, 2, 5, 26, 3, 9, 0];
 console.log("Original array: ", numbers);
 
 asyncMap(numbers, asyncDouble)
