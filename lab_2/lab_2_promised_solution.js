@@ -40,7 +40,8 @@ const asyncDouble = (value) => {
     });
 };
 
-// Use case
+
+
 const numbers = [1, 2, 5, 'asdklfjh', 3, 9, 0];
 console.log("Original array: ", numbers);
 

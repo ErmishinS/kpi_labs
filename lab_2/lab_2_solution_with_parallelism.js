@@ -1,14 +1,15 @@
 const asyncMap = async (array, asyncCallback) => {
     const mappedArray = [];
-    for (let i = 0; i < array.length; i++) {
+    const promises = array.map(async (item, index) => {
         try {
-            const result = await asyncCallback(array[i]);
-            mappedArray[i] = result;
+            const result = await asyncCallback(item);
+            mappedArray[index] = result;
         } catch (err) {
             console.error(err);
-            mappedArray[i] = undefined;
+            mappedArray[index] = undefined;
         }
-    }
+    });
+    await Promise.all(promises);
     return mappedArray;
 };
 
@@ -27,8 +28,7 @@ const asyncDouble = async (value) => {
     });
 };
 
-
-const numbers = [1.1, 'qwerty', 26];
+const numbers = ['string', 'str', 12345];
 console.log("Original array: ", numbers);
 
 async function processWithAsyncAwait() {
