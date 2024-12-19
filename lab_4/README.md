@@ -1,3 +1,10 @@
+# Task 4 (Stream/AsyncIterator/Alternative)
+  * Ongoing processing of large data sets that do not fit in memory
+
+
+
+# Code for solution with async iterator
+```js
 const asyncMap = async function* (array, asyncCallback, signal) {
 
     for (const item of array) {
@@ -65,3 +72,12 @@ async function runTask() {
 }
 
 runTask();
+```
+
+# Testing program
+
+### Test 1
+<img src="./media/lab_4_test_1.png">
+
+### Test 2
+<img src="./media/lab_4_test_2.png">

@@ -1,5 +1,5 @@
 # Task 3
-  * Integrate AbortController or other Cancallable approach
+* Integrate AbortController or other Cancallable approach
 
 
 # Code for solution with AbortController
