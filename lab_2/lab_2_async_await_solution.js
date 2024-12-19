@@ -13,10 +13,9 @@ const asyncMap = async (array, asyncCallback) => {
 };
 
 const asyncDouble = async (value) => {
-    const delay = Math.floor(Math.random() * 2500) + 500;
-    console.log(`Processing ${value} with delay ${delay}ms`);
-
     return new Promise((resolve, reject) => {
+        const delay = Math.floor(Math.random() * 2500) + 500;
+        console.log(`Processing ${value} with delay ${delay}ms`);
         setTimeout(() => {
             if (typeof value !== 'number') {
                 reject(new Error(`${value} is not a number!`));
@@ -31,7 +30,7 @@ const asyncDouble = async (value) => {
 const numbers = [1.1, 'qwerty', 26];
 console.log("Original array: ", numbers);
 
-async function processWithAsyncAwait() {
+async function runTask() {
     try {
         const results = await asyncMap(numbers, asyncDouble);
         console.log("Async-Await results:", results);
@@ -40,4 +39,4 @@ async function processWithAsyncAwait() {
     }
 }
 
-processWithAsyncAwait();
+runTask();

@@ -8,28 +8,30 @@
 
 # Code for promise based solution
 ```js
-const asyncMap = (array, asyncCallback) => {
+const asyncMap = (array, asyncFunction) => {
     const arrayLength = array.length;
     const mappedArray = [];
     let completed = 0;
 
+    
+
     return new Promise((resolve, reject) => {
+        const actionAfterEachElement = () => {
+            completed++;
+            if (completed === arrayLength) {
+                resolve(mappedArray);
+            }
+        }
         for (let i = 0; i < arrayLength; i++) {
-            asyncCallback(array[i])
+            asyncFunction(array[i])
                 .then(result => {
                     mappedArray[i] = result;
-                    completed++;
-                    if (completed === arrayLength) {
-                        resolve(mappedArray);
-                    }
+                    actionAfterEachElement()
                 })
                 .catch(err => {
-                    console.error(err);
+                    console.error(err.message);
                     mappedArray[i] = undefined;
-                    completed++;
-                    if (completed === arrayLength) {
-                        resolve(mappedArray);
-                    }
+                    actionAfterEachElement()
                 });
         }
     });
@@ -42,7 +44,7 @@ const asyncDouble = (value) => {
 
         setTimeout(() => {
             if (typeof value !== 'number') {
-                reject(new Error('Input must be a number'));
+                reject(new Error(`${value} is not a number!`));
             } else {
                 resolve(value * 2);
             }
@@ -52,7 +54,7 @@ const asyncDouble = (value) => {
 
 
 
-const numbers = [1, 2, 5, 'asdklfjh', 3, 9, 0];
+const numbers = [1, 2, 5, 'ogogog', 3, 9, 0];
 console.log("Original array: ", numbers);
 
 asyncMap(numbers, asyncDouble)
@@ -60,7 +62,7 @@ asyncMap(numbers, asyncDouble)
         console.log("Promise-based results:", results);
     })
     .catch(err => {
-        console.error("Error in Promise-based map:", err);
+        console.error(err.message);
     });
 ```
 
@@ -82,7 +84,7 @@ const asyncMap = async (array, asyncCallback) => {
             const result = await asyncCallback(array[i]);
             mappedArray[i] = result;
         } catch (err) {
-            console.error(err);
+            console.error(err.message);
             mappedArray[i] = undefined;
         }
     }
@@ -90,13 +92,12 @@ const asyncMap = async (array, asyncCallback) => {
 };
 
 const asyncDouble = async (value) => {
-    const delay = Math.floor(Math.random() * 2500) + 500;
-    console.log(`Processing ${value} with delay ${delay}ms`);
-
     return new Promise((resolve, reject) => {
+        const delay = Math.floor(Math.random() * 2500) + 500;
+        console.log(`Processing ${value} with delay ${delay}ms`);
         setTimeout(() => {
             if (typeof value !== 'number') {
-                reject(new Error('Input must be a number'));
+                reject(new Error(`${value} is not a number!`));
             } else {
                 resolve(value * 2);
             }
@@ -108,16 +109,16 @@ const asyncDouble = async (value) => {
 const numbers = [1.1, 'qwerty', 26];
 console.log("Original array: ", numbers);
 
-async function processWithAsyncAwait() {
+async function runTask() {
     try {
         const results = await asyncMap(numbers, asyncDouble);
         console.log("Async-Await results:", results);
     } catch (err) {
-        console.error(err);
+        console.error(err.message);
     }
 }
 
-processWithAsyncAwait();
+runTask();
 ```
 
 # Testing program
@@ -141,7 +142,7 @@ const asyncMap = async (array, asyncCallback) => {
             const result = await asyncCallback(item);
             mappedArray[index] = result;
         } catch (err) {
-            console.error(err);
+            console.error(err.message);
             mappedArray[index] = undefined;
         }
     });
@@ -150,13 +151,13 @@ const asyncMap = async (array, asyncCallback) => {
 };
 
 const asyncDouble = async (value) => {
-    const delay = Math.floor(Math.random() * 2500) + 500;
-    console.log(`Processing ${value} with delay ${delay}ms`);
-
     return new Promise((resolve, reject) => {
+        const delay = Math.floor(Math.random() * 2500) + 500;
+        console.log(`Processing ${value} with delay ${delay}ms`);
+
         setTimeout(() => {
             if (typeof value !== 'number') {
-                reject(new Error('Input must be a number'));
+                reject(new Error(`${value} is not a number!`));
             } else {
                 resolve(value * 2);
             }
@@ -164,19 +165,19 @@ const asyncDouble = async (value) => {
     });
 };
 
-const numbers = [52, 2626, 1, 0, 5];
+const numbers = ['string', 'str', 12345];
 console.log("Original array: ", numbers);
 
-async function processWithAsyncAwait() {
+async function runTask() {
     try {
         const results = await asyncMap(numbers, asyncDouble);
         console.log("Async-Await results:", results);
     } catch (err) {
-        console.error(err);
+        console.error(err.message);
     }
 }
 
-processWithAsyncAwait();
+runTask();
 ```
 
 # Testing program

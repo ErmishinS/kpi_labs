@@ -1,25 +1,27 @@
-const asyncMap = (array, asyncCallback) => {
+const asyncMap = (array, asyncFunction) => {
     const arrayLength = array.length;
     const mappedArray = [];
     let completed = 0;
 
+    
+
     return new Promise((resolve, reject) => {
+        const actionAfterEachElement = () => {
+            completed++;
+            if (completed === arrayLength) {
+                resolve(mappedArray);
+            }
+        }
         for (let i = 0; i < arrayLength; i++) {
-            asyncCallback(array[i])
+            asyncFunction(array[i])
                 .then(result => {
                     mappedArray[i] = result;
-                    completed++;
-                    if (completed === arrayLength) {
-                        resolve(mappedArray);
-                    }
+                    actionAfterEachElement()
                 })
                 .catch(err => {
                     console.error(err.message);
                     mappedArray[i] = undefined;
-                    completed++;
-                    if (completed === arrayLength) {
-                        resolve(mappedArray);
-                    }
+                    actionAfterEachElement()
                 });
         }
     });
