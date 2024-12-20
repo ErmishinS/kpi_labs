@@ -1,10 +1,24 @@
+
+---
+
+<p style="display: flex; justify-content: space-around;">
+    <a href="../">Main page</a>
+    <a href="../lab_1/">Task 1</a>
+    <a href="../lab_2/">Task 2</a>
+    <a href="../lab_3/">Task 3</a>
+    <a href="../lab_4/">Task 4</a>
+    <a href="../lab_5/">Task 5</a>
+</p>
+
+---
+
 # Task 4 (Stream/AsyncIterator/Alternative)
   * Ongoing processing of large data sets that do not fit in memory
 
 
 
 # Code for solution with async iterator
-```js
+```javascript
 const asyncMap = async function* (array, asyncCallback, signal) {
 
     for (const item of array) {
@@ -84,7 +98,7 @@ runTask();
 
 
 # Code for solution with batching by 5
-```js
+```javascript
 const asyncMapBatch = async function* (array, asyncCallback, signal, batchSize = 5) {
     for (let i = 0; i < array.length; i += batchSize) {
         if (signal.aborted) {

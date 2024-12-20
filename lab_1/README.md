@@ -1,10 +1,24 @@
+
+---
+
+<p style="display: flex; justify-content: space-around;">
+    <a href="../">Main page</a>
+    <a href="../lab_1/">Task 1</a>
+    <a href="../lab_2/">Task 2</a>
+    <a href="../lab_3/">Task 3</a>
+    <a href="../lab_4/">Task 4</a>
+    <a href="../lab_5/">Task 5</a>
+</p>
+
+---
+
 # Task 1
   * Choose array fn (map/filter/filterMap/some/find/findIndex)
   * Prepare its callback based async counterpart
   * Prepare demo cases for the usage
 
 # JS code
-```js
+```javascript
 const asyncMap = (array, asyncCallback) => {
     const arrayLength = array.length
     const mappedArray = [];

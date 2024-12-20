@@ -1,3 +1,17 @@
+
+---
+
+<p style="display: flex; justify-content: space-around;">
+    <a href="../">Main page</a>
+    <a href="../lab_1/">Task 1</a>
+    <a href="../lab_2/">Task 2</a>
+    <a href="../lab_3/">Task 3</a>
+    <a href="../lab_4/">Task 4</a>
+    <a href="../lab_5/">Task 5</a>
+</p>
+
+---
+
 # Task 2
   * Prepare promise based alternative
   * Write use cases for the promise based solution
@@ -7,7 +21,7 @@
 
 
 # Code for promise based solution
-```js
+```javascript
 const asyncMap = (array, asyncFunction) => {
     const arrayLength = array.length;
     const mappedArray = [];
@@ -76,7 +90,7 @@ asyncMap(numbers, asyncDouble)
 
 
 # Code for async-await solution
-```js
+```javascript
 const asyncMap = async (array, asyncCallback) => {
     const mappedArray = [];
     for (let i = 0; i < array.length; i++) {
@@ -134,7 +148,7 @@ runTask();
 
 
 # Code for "with parallelism"
-```js
+```javascript
 const asyncMap = async (array, asyncCallback) => {
     const mappedArray = [];
     const promises = array.map(async (item, index) => {
