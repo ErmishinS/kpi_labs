@@ -1,15 +1,7 @@
 
 ---
-
-<p style="display: flex; justify-content: space-between;">
-    <a href="../">Main page</a>
-    <a href="../lab_1/">Task 1</a>
-    <a href="../lab_2/">Task 2</a>
-    <a href="../lab_3/">Task 3</a>
-    <a href="../lab_4/">Task 4</a>
-    <a href="../lab_5/">Task 5</a>
-</p>
-
+| [Main page](../) | [Task 1](../lab_1/) | [Task 2](../lab_2/) | [Task 3](../lab_3/) | [Task 4](../lab_4/) | [Task 5](../lab_5/) |
+| --- | --- | --- | --- | --- | --- |
 ---
 
 # Task 1
@@ -18,7 +10,7 @@
   * Prepare demo cases for the usage
 
 # JS code
-```javascript
+```js
 const asyncMap = (array, asyncCallback) => {
     const arrayLength = array.length
     const mappedArray = [];
