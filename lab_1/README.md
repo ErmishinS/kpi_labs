@@ -1,7 +1,7 @@
 
 ---
 
-<p style="display: flex; justify-content: space-around;">
+<p style="display: flex; justify-content: space-between;">
     <a href="../">Main page</a>
     <a href="../lab_1/">Task 1</a>
     <a href="../lab_2/">Task 2</a>

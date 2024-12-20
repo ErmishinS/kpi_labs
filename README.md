@@ -4,13 +4,13 @@
 This repository contains lab works focused on asynchronous programming. From the subject Components of Software Engineering. Part 2. Software Modeling. Software Requirements Analysis
 
 ## 📂 Contents  
-| Lab | Brief Description                                                                                       | Link                                                 |  
-|-----|-------------------------------------------------------------------------------------------------------|------------------------------------------------------|  
-| Task 1 | Implement asynchronous array methods (map, filter, find, etc.) and add on-demand features              | [Task 1](./lab_1/)                              |  
-| Task 2 | Create Promise-based alternatives, write usage examples with Promise and async/await                  | [Task 2](./lab_2/)                              |  
-| Task 3 | Implement AbortController or other cancellable approaches                                             | [Task 3](./lab_3/)                              |  
-| Task 4 | Process large data sets that don't fit in memory (Streams, AsyncIterator, or alternatives)            | [Task 4](./lab_4/)                              |  
-| Task 5 | Implement reactive communication systems (Observable, EventEmitter, or alternatives)                   | [Task 5](./lab_5/)                              |  
+| Lab | Brief Description                                                                                     |   
+|-----|-------------------------------------------------------------------------------------------------------|
+| [Task 1](./lab_1/) | Implement asynchronous array methods (map, filter, find, etc.) and add on-demand features              |
+| [Task 2](./lab_2/)  | Create Promise-based alternatives, write usage examples with Promise and async/await                  |
+| [Task 3](./lab_3/)  | Implement AbortController or other cancellable approaches                                             |
+| [Task 4](./lab_4/)  | Process large data sets that don't fit in memory (Streams, AsyncIterator, or alternatives)            |
+| [Task 5](./lab_5/)  | Implement reactive communication systems (Observable, EventEmitter, or alternatives)                  |
 
 ## 🛠️ Detailed Tasks  
 ### Task 1: Asynchronous Array Methods  
