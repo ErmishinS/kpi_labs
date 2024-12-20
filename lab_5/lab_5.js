@@ -76,7 +76,7 @@ emitter.on('error', (item, error) => {
     console.error(`Error processing ${item}: ${error.message}`);
 });
 
-const numbers = [1, 'some text', 3, 4, 5, 6];
+const numbers = [26, 2626, 52];
 const duplicatedArray = [];
 for (let i = 0; i < 5000; i++) {
     duplicatedArray.push(...numbers);
