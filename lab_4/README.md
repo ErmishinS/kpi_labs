@@ -20,10 +20,10 @@ const asyncMap = async function* (array, asyncCallback, signal) {
 
         try {
             const result = await asyncCallback(item, signal);
-            yield result;  // возвращаем результат по мере готовности
+            yield result;
         } catch (err) {
             console.error(err.message);
-            yield undefined;  // в случае ошибки возвращаем "undefined"
+            yield undefined;
         }
     }
 };
