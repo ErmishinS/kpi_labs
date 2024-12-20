@@ -6,11 +6,11 @@ This repository contains lab works focused on asynchronous programming. From the
 ## 📂 Contents  
 | Lab | Brief Description                                                                                       | Link                                                 |  
 |-----|-------------------------------------------------------------------------------------------------------|------------------------------------------------------|  
-| Task 1 | Implement asynchronous array methods (map, filter, find, etc.) and add on-demand features              | [Go to Task 1](./lab_1/README.md)                              |  
-| Task 2 | Create Promise-based alternatives, write usage examples with Promise and async/await                  | [Go to Task 2](./lab_2/README.md)                              |  
-| Task 3 | Implement AbortController or other cancellable approaches                                             | [Go to Task 3](./lab_3/README.md)                              |  
-| Task 4 | Process large data sets that don't fit in memory (Streams, AsyncIterator, or alternatives)            | [Go to Task 4](./lab_4/README.md)                              |  
-| Task 5 | Implement reactive communication systems (Observable, EventEmitter, or alternatives)                   | [Go to Task 5](./lab_5/README.md)                              |  
+| Task 1 | Implement asynchronous array methods (map, filter, find, etc.) and add on-demand features              | [Go to Task 1](./lab_1/)                              |  
+| Task 2 | Create Promise-based alternatives, write usage examples with Promise and async/await                  | [Go to Task 2](./lab_2/)                              |  
+| Task 3 | Implement AbortController or other cancellable approaches                                             | [Go to Task 3](./lab_3/)                              |  
+| Task 4 | Process large data sets that don't fit in memory (Streams, AsyncIterator, or alternatives)            | [Go to Task 4](./lab_4/)                              |  
+| Task 5 | Implement reactive communication systems (Observable, EventEmitter, or alternatives)                   | [Go to Task 5](./lab_5/)                              |  
 
 ## 🛠️ Detailed Tasks  
 ### Task 1: Asynchronous Array Methods  
