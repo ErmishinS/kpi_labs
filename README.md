@@ -1,3 +1,5 @@
+# ALL TASKS HAS ALREADY BEEN SUBMITTED
+
 # 🚀 JavaScript Async Lab Works Repository
 
 ## 📜 Description  
