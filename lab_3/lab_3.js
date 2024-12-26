@@ -43,13 +43,15 @@ const asyncDouble = (value, signal) => {
             }
         }, delay);
 
+        const abortHandler = () => {
+            clearTimeout(timeout);
+            const abortError = new Error('AbortError');
+            abortError.name = 'AbortError';
+            reject(abortError);
+        };
+
         if (signal) {
-            signal.addEventListener('abort', () => {
-                clearTimeout(timeout);
-                const abortError = new Error('AbortError');
-                abortError.name = 'AbortError';
-                reject(abortError);
-            });
+            signal.addEventListener('abort', abortHandler);
         }
     });
 };
@@ -64,7 +66,7 @@ async function processWithAbortController() {
     const abortTimeout = setTimeout(() => {
         console.log('Aborting operations...');
         controller.abort();
-    }, 1500);
+    }, 100000);
 
     try {
         const results = await asyncMap(numbers, asyncDouble, signal);

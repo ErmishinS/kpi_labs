@@ -10,30 +10,43 @@
 
 # Code for solution with AbortController
 ```javascript
-const asyncMap = async (array, asyncCallback, signal) => {
+const asyncMap = (array, asyncFunction, signal) => {
+    const arrayLength = array.length;
     const mappedArray = [];
-    const promises = array.map(async (item, index) => {
-        try {
-            const result = await asyncCallback(item, signal);
-            mappedArray[index] = result;
-        } catch (err) {
-            if (err.name === 'AbortError') {
-                console.error(`Operation aborted for item ${item}`);
-            } else {
-                console.error(err.message);
-            }
-            mappedArray[index] = undefined;
-        }
-    });
-    await Promise.all(promises);
-    return mappedArray;
-};
-
-const asyncDouble = async (value, signal) => {
-    const delay = Math.floor(Math.random() * 2500) + 500;
-    console.log(`Processing ${value} with delay ${delay}ms`);
+    let completed = 0;
+    let hasError = false;
 
     return new Promise((resolve, reject) => {
+        const actionAfterEachElement = () => {
+            completed++;
+            if (completed === arrayLength && !hasError) {
+                resolve(mappedArray);
+            }
+        };
+
+        for (let i = 0; i < arrayLength; i++) {
+            asyncFunction(array[i], signal)
+                .then(result => {
+                    mappedArray[i] = result;
+                    actionAfterEachElement();
+                })
+                .catch(err => {
+                    mappedArray[i] = undefined;
+                    if (!hasError) {
+                        hasError = true;
+                        reject(err);
+                    }
+                    actionAfterEachElement();
+                });
+        }
+    });
+};
+
+const asyncDouble = (value, signal) => {
+    return new Promise((resolve, reject) => {
+        const delay = Math.floor(Math.random() * 2500) + 500;
+        console.log(`Processing ${value} with delay ${delay}ms`);
+
         const timeout = setTimeout(() => {
             if (typeof value !== 'number') {
                 reject(new Error(`${value} is not a number!`));
@@ -42,33 +55,42 @@ const asyncDouble = async (value, signal) => {
             }
         }, delay);
 
-        signal.addEventListener('abort', () => {
+        const abortHandler = () => {
             clearTimeout(timeout);
-            const abortError = new Error('AbortError')
-            abortError.name = 'AbortError'
+            const abortError = new Error('AbortError');
+            abortError.name = 'AbortError';
             reject(abortError);
-        });
+        };
+
+        if (signal) {
+            signal.addEventListener('abort', abortHandler);
+        }
     });
 };
 
-
-const numbers = [1, 2, 'hello', 4, 5];
+const numbers = [1, 2, 5, 123, 3, 9, 0];
 console.log("Original array: ", numbers);
 
 async function processWithAbortController() {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    setTimeout(() => {
+    const abortTimeout = setTimeout(() => {
         console.log('Aborting operations...');
         controller.abort();
-    }, 1500);
+    }, 100000);
 
     try {
         const results = await asyncMap(numbers, asyncDouble, signal);
-        console.log("Results with AbortController:", results);
+        console.log("Promise-based results:", results);
+        clearTimeout(abortTimeout)
+        return;
     } catch (err) {
-        console.error(err.message);
+        if (err.name === 'AbortError') {
+            console.error('Processing was aborted.');
+        } else {
+            console.error(`Error: ${err.message}`);
+        }
     }
 }
 

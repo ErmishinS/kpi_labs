@@ -18,26 +18,28 @@ const asyncMap = (array, asyncFunction) => {
     const arrayLength = array.length;
     const mappedArray = [];
     let completed = 0;
-
-    
+    let hasError = false;
 
     return new Promise((resolve, reject) => {
         const actionAfterEachElement = () => {
             completed++;
-            if (completed === arrayLength) {
+            if (completed === arrayLength && !hasError) {
                 resolve(mappedArray);
             }
-        }
+        };
+
         for (let i = 0; i < arrayLength; i++) {
             asyncFunction(array[i])
                 .then(result => {
                     mappedArray[i] = result;
-                    actionAfterEachElement()
+                    actionAfterEachElement();
                 })
                 .catch(err => {
-                    console.error(err.message);
                     mappedArray[i] = undefined;
-                    actionAfterEachElement()
+                    if (!hasError) {
+                        hasError = true;
+                        reject(err);
+                    }
                 });
         }
     });
@@ -58,8 +60,6 @@ const asyncDouble = (value) => {
     });
 };
 
-
-
 const numbers = [1, 2, 5, 'ogogog', 3, 9, 0];
 console.log("Original array: ", numbers);
 
@@ -68,7 +68,7 @@ asyncMap(numbers, asyncDouble)
         console.log("Promise-based results:", results);
     })
     .catch(err => {
-        console.error(err.message);
+        console.error("Error:", err.message);
     });
 ```
 
