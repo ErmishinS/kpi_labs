@@ -31,11 +31,19 @@ const asyncMap = (array, asyncFunction, signal) => {
 };
 
 const asyncDouble = (value, signal) => {
+    const abortHandler = (timeout, reject) => {
+        clearTimeout(timeout);
+        const abortError = new Error('AbortError');
+        abortError.name = 'AbortError';
+        reject(abortError);
+    };
+
+    let timeout;
     return new Promise((resolve, reject) => {
         const delay = Math.floor(Math.random() * 2500) + 500;
         console.log(`Processing ${value} with delay ${delay}ms`);
 
-        const timeout = setTimeout(() => {
+        timeout = setTimeout(() => {
             if (typeof value !== 'number') {
                 reject(new Error(`${value} is not a number!`));
             } else {
@@ -43,16 +51,12 @@ const asyncDouble = (value, signal) => {
             }
         }, delay);
 
-        const abortHandler = () => {
-            clearTimeout(timeout);
-            const abortError = new Error('AbortError');
-            abortError.name = 'AbortError';
-            reject(abortError);
-        };
-
         if (signal) {
-            signal.addEventListener('abort', abortHandler);
+            signal.addEventListener('abort', () => abortHandler(timeout, reject));
         }
+    }).finally(() => {
+        console.log('Removing abort event listener.');
+        signal.removeEventListener('abort', () => abortHandler(timeout, reject));
     });
 };
 
@@ -66,12 +70,12 @@ async function processWithAbortController() {
     const abortTimeout = setTimeout(() => {
         console.log('Aborting operations...');
         controller.abort();
-    }, 100000);
+    }, 2000);
 
     try {
         const results = await asyncMap(numbers, asyncDouble, signal);
         console.log("Promise-based results:", results);
-        clearTimeout(abortTimeout)
+        clearTimeout(abortTimeout);
         return;
     } catch (err) {
         if (err.name === 'AbortError') {
